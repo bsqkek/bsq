@@ -20,12 +20,22 @@ t_bool	ft_create_cache(void)
 		|| g_empty == g_square || g_full == g_square || c != '\n')
 		return (ERROR);
 	g_buf = (char *)malloc(sizeof(char) * BUFF_SIZE);
-	while (read(g_fd, &c, 1) && c != '\n' && (g_buf[g_cols] = c))
+	while (read(g_fd, &c, 1) && c != '\n')
+	{
+		g_buf[g_cols] = c;
 		++g_cols;
+	}
 	g_cache = (char **)malloc(sizeof(char *) * g_rows);
-	g_i = -1;
-	while (++g_i < g_rows)
-		g_cache[g_i] = (char *)malloc(sizeof(char) * g_cols);
+	g_cache[0] = (char *)malloc(sizeof(char) * g_cols);
+	g_buffer= (int *)malloc(sizeof(int) * g_cols);
+	g_j = -1;
+	while(++g_j < g_cols)
+	{
+		if ((g_cache[0][g_j] = g_buf[g_j]) == g_empty)
+			g_buffer[g_j] = 1;
+		else
+			g_buffer[g_j] = 0;
+	}
 	free(g_buf);
 	return (SUCCESS);
 }

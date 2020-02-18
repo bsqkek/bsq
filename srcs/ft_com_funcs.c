@@ -10,8 +10,21 @@ int		ft_min(int a, int b, int c)
 	return (c);
 }
 
-void	ft_clear(void)
+char	*ft_strcat(char *dest, char *src)
 {
-	free(g_cache);
-	g_cache = NULL;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (*(dest + i) != '\0')
+		i++;
+	while (*(src + j) != '\0')
+	{
+		*(dest + i) = *(src + j);
+		i++;
+		j++;
+	}
+	*(dest + i) = '\0';
+	return (dest);
 }

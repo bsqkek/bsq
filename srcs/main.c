@@ -12,5 +12,7 @@ int main(int argc, char **argv)
 	else
 		write(2, "map error\n", 10);
 	close(g_fd);
+	free(g_cache);
+	free(g_buffer);
 	return (0);
 }

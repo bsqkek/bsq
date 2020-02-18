@@ -26,13 +26,13 @@ int				g_y;
 int				g_rows;
 int				g_cols;
 int				g_res;
-int				tmp;
 char			g_empty;
 char			g_full;
 char			g_square;
 char			**g_cache;
-int				*buffer;
+int				*g_buffer;
 char			*g_buf;
+int				*g_tmp;
 short			g_fd;
 
 /*
@@ -56,6 +56,7 @@ void	ft_print(void);
 */
 t_bool	ft_solve_bsq(void);
 t_bool	ft_final_cache(void);
+t_bool	is_valid(void);
 
 
 #endif
