@@ -6,7 +6,6 @@ t_bool	ft_solve_bsq(void)
 	if (!(is_valid()))
 		return (ERROR);
 	g_i = 1;
-	g_tmp = (int *)malloc(sizeof(int) * 2);
 	while (g_i < g_rows)
 	{
 		if (g_res > 1)
@@ -41,6 +40,8 @@ t_bool	is_valid(void)
 {
 	char	c;
 
+	printf("My error\n");
+	return (ERROR);
 	g_i = 1;
 	while (g_i < g_rows)
 	{
