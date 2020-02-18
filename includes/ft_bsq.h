@@ -26,13 +26,13 @@ int				g_y;
 int				g_rows;
 int				g_cols;
 int				g_res;
-int				tmp;
+int				g_tmp;
 char			g_empty;
 char			g_full;
 char			g_square;
 char			**g_cache;
-int				*buffer;
-char			*g_buf;
+int				*g_buffer;
+char			*g_1line;
 short			g_fd;
 
 /*
