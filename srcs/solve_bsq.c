@@ -3,13 +3,21 @@
 
 t_bool	ft_solve_bsq(void)
 {
+	int		last_obstacle;
+
 	if (!(is_valid()))
 		return (ERROR);
 	g_i = 1;
 	while (g_i < g_rows)
 	{
 		if (g_res > 1)
-			g_j = g_cols - g_res;
+		{
+			last_obstacle = g_res + 1;
+			while (g_cache[g_i][--last_obstacle] != g_full)
+				;
+			g_buffer[g_res] = g_res - last_obstacle;
+			g_j = g_res + 1;
+		}
 		else
 			g_j = 0;
 		g_tmp[0] = g_buffer[g_j];
@@ -40,8 +48,6 @@ t_bool	is_valid(void)
 {
 	char	c;
 
-	printf("My error\n");
-	return (ERROR);
 	g_i = 1;
 	while (g_i < g_rows)
 	{
