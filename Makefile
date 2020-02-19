@@ -6,7 +6,7 @@
 #    By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 19:52:51 by lnovella          #+#    #+#              #
-#    Updated: 2020/02/18 14:57:32 by lnovella         ###   ########.fr        #
+#    Updated: 2020/02/19 20:21:22 by lnovella         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,18 +18,16 @@ OBJS = cache.o solve_bsq.o print_bsq.o main.o ft_com_funcs.o
 
 HEADERS = includes
 
-FLAGS = -Wall -Wextra -Werror
+$(NAME): $(SRCS)
+	gcc -I $(HEADERS) -c $(SRCS)
+	gcc -o $(NAME) $(OBJS)
 
 all: $(NAME)
 
-$(NAME):
-	gcc $(FLAGS) -I $(HEADERS) -c $(SRCS)
-	gcc -o $(NAME) $(OBJS)
-
 clean:
-	/bin/rm -f *.o
+	rm -f *.o
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
