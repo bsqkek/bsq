@@ -6,15 +6,15 @@
 #    By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/17 19:52:51 by lnovella          #+#    #+#              #
-#    Updated: 2020/02/19 20:21:22 by lnovella         ###   ########.fr        #
+#    Updated: 2020/02/19 20:55:31 by lnovella         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = bsq
 
-SRCS = srcs/cache.c srcs/solve_bsq.c srcs/print_bsq.c srcs/main.c srcs/ft_com_funcs.c
+SRCS = srcs/cache.c srcs/solve_bsq.c srcs/print_bsq.c srcs/main.c srcs/ft_com_funcs.c srcs/add.c
 
-OBJS = cache.o solve_bsq.o print_bsq.o main.o ft_com_funcs.o
+OBJS = cache.o solve_bsq.o print_bsq.o main.o ft_com_funcs.o add.o
 
 HEADERS = includes
 

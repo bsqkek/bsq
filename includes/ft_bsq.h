@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bsq.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/19 21:06:55 by lnovella          #+#    #+#             */
+/*   Updated: 2020/02/19 21:07:10 by lnovella         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_BSQ_H
 
@@ -10,8 +21,6 @@
 # include <sys/stat.h>
 # include <unistd.h>
 # include <errno.h>
-
-# include <stdio.h> // delete it
 
 # define SUCCESS 1
 # define ERROR 0
@@ -39,6 +48,8 @@ short			g_fd;
 ** cache.c
 */
 t_bool	ft_create_cache(void);
+t_bool	read_map_options(void);
+void	ft_realloc(int length);
 
 /*
 ** ft_com_funcs.c
@@ -57,6 +68,11 @@ void	ft_print(void);
 t_bool	ft_solve_bsq(void);
 t_bool	ft_final_cache(void);
 t_bool	is_valid(void);
+void	ft_analize(void);
 
+/*
+** add.c
+*/
+t_bool	add_func2(void);
 
 #endif
