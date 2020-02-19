@@ -3,34 +3,35 @@
 
 t_bool	ft_solve_bsq(void)
 {
-	int		last_obstacle;
+	//int		last_obstacle;
 
 	if (!(is_valid()))
 		return (ERROR);
 	g_i = 1;
 	while (g_i < g_rows)
 	{
-		if (g_res > 1)
+		/*if (g_res > 1)
 		{
 			last_obstacle = g_res + 1;
 			while (last_obstacle && g_cache[g_i][--last_obstacle] != g_full)
 				;
-			g_j = g_res + 1;
+			g_j = last_obstacle + 1;
 			g_tmp[0] = g_buffer[g_j - 1];
-			g_buffer[g_res] = g_res - last_obstacle;
+			g_buffer[last_obstacle] = 0;
 		}
 		else
-		{
+		{*/
 			g_j = 0;
 			g_tmp[0] = g_buffer[g_j];
-		}
+		//}
 		while (g_j < g_cols)
 		{
+			g_tmp[1] = g_buffer[g_j];
 			if (g_cache[g_i][g_j] == g_full)
 				g_buffer[g_j] = 0;
 			else if (g_j == 0)
 				g_buffer[g_j] = 1;
-			else if ((g_tmp[1] = g_buffer[g_j]) >= 0)
+			else
 				g_buffer[g_j] = 1 + ft_min(g_buffer[g_j], g_buffer[g_j - 1], g_tmp[0]);
 			if (g_j > 0)
 				g_tmp[0] = g_tmp[1];
@@ -68,7 +69,11 @@ t_bool	is_valid(void)
 		g_i++;
 	}
 	for (int i = 0; i < g_rows; i++)
-		printf("%s\n", g_cache[i]);
+	{
+		for (int j = 0; j < g_cols; j++)
+			printf("%c", g_cache[i][j]);
+		printf("\n");
+	}
 	printf("-------------------------\n");
 	return (SUCCESS);
 }
