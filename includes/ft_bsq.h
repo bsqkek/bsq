@@ -3,7 +3,6 @@
 
 # define FT_BSQ_H
 
-# define BUFF_SIZE 4096
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -14,10 +13,10 @@
 
 # include <stdio.h> // delete it
 
-# define SUCCESS 1 // next 3 lines may be useful
-# define ERROR 0 //
+# define SUCCESS 1
+# define ERROR 0
 
-typedef int		t_bool; //
+typedef int		t_bool;
 
 int				g_i;
 int				g_j;
@@ -30,7 +29,7 @@ char			g_tmp[2];
 char			g_empty;
 char			g_full;
 char			g_square;
-char			**g_cache;
+char			*g_cache;
 char			g_c;
 int				*g_buffer;
 char			*g_1line;

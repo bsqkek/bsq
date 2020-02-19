@@ -65,8 +65,6 @@ t_bool	ft_create_cache(void)
 	set_global_variables();
 	if (!read_map_options())
 		return (ERROR);
-	if (!(g_cache = (char **)malloc(sizeof(char *) * g_rows)))
-		exit (1);
 	g_i = -1;
 	while (++g_i < 14 && read(g_fd, &g_1line[g_i], 1) && g_1line[g_i] != '\n')
 		if (g_1line[g_i] != g_empty && g_1line[g_i] != g_full)
@@ -85,7 +83,7 @@ t_bool	ft_create_cache(void)
 				return (ERROR);
 	}
 	g_cols = g_i;
-	g_cache[0] = (char *)malloc(sizeof(char) * g_cols);
+	g_cache = (char *)malloc(sizeof(char) * (g_cols + 1) * g_rows);
 	g_buffer= (int *)malloc(sizeof(int) * g_cols);
 	if (!g_cache || !g_buffer)
 		exit (1);
@@ -93,7 +91,7 @@ t_bool	ft_create_cache(void)
 	flag = 0;
 	while(++g_j < g_cols)
 	{
-		if ((g_cache[0][g_j] = g_1line[g_j]) == g_empty)
+		if ((g_cache[g_j] = g_1line[g_j]) == g_empty)
 		{
 			if (!flag && (flag = 1) && (g_res = 1))
 				g_x = g_j;
@@ -102,6 +100,7 @@ t_bool	ft_create_cache(void)
 		else
 			g_buffer[g_j] = 0;
 	}
+	g_cache[g_cols] = '\n';
 	free(g_1line);
 	return (SUCCESS);
 }

@@ -3,31 +3,17 @@
 
 t_bool	ft_solve_bsq(void)
 {
-	//int		last_obstacle;
-
 	if (!(is_valid()))
 		return (ERROR);
 	g_i = 1;
 	while (g_i < g_rows)
 	{
-		/*if (g_res > 1)
-		{
-			last_obstacle = g_res + 1;
-			while (last_obstacle && g_cache[g_i][--last_obstacle] != g_full)
-				;
-			g_j = last_obstacle + 1;
-			g_tmp[0] = g_buffer[g_j - 1];
-			g_buffer[last_obstacle] = 0;
-		}
-		else
-		{*/
-			g_j = 0;
-			g_tmp[0] = g_buffer[g_j];
-		//}
+		g_j = 0;
+		g_tmp[0] = g_buffer[g_j];
 		while (g_j < g_cols)
 		{
 			g_tmp[1] = g_buffer[g_j];
-			if (g_cache[g_i][g_j] == g_full)
+			if (g_cache[g_i * (g_cols + 1) + g_j] == g_full)
 				g_buffer[g_j] = 0;
 			else if (g_j == 0)
 				g_buffer[g_j] = 1;
@@ -52,33 +38,25 @@ t_bool	is_valid(void)
 {
 	char	c;
 
+	if (read(g_fd, g_cache + g_cols + 1, (g_rows - 1) * (g_cols + 1)) < 0)
+		return (ERROR);
 	g_i = 1;
 	while (g_i < g_rows)
 	{
 		g_j = 0;
-		if (!(g_cache[g_i] = (char *)malloc(sizeof(char) * (g_cols + 1))))
-			exit (1);
-		while (read(g_fd, &c, 1) && c != '\n')
+		while (g_j < g_cols)
 		{
-			if (c != g_empty && c != g_full)
+			if (g_cache[g_i * (g_cols + 1) + g_j] != g_empty &&
+				g_cache[g_i * (g_cols + 1) + g_j] != g_full)
 				return (ERROR);
-			g_cache[g_i][g_j] = c;
 			g_j++;
 		}
-		g_cache[g_i][g_j] = '\n';
-		if (g_j != g_cols)
+		if (g_cache[g_i * (g_cols + 1) + g_j] != '\n')
 			return (ERROR);
 		g_i++;
 	}
 	if (read(g_fd, &c, 1) && c != '\0')
 		return (ERROR);
-	/*for (int i = 0; i < g_rows; i++)
-	{
-		for (int j = 0; j < g_cols; j++)
-			printf("%c", g_cache[i][j]);
-		printf("\n");
-	}
-	printf("-------------------------\n");*/
 	return (SUCCESS);
 }
 
@@ -90,7 +68,7 @@ t_bool	ft_final_cache(void)
 		g_j  = g_x + 1 - g_res;
 		while (g_j <= g_x)
 		{
-			g_cache[g_i][g_j] = g_square;
+			g_cache[g_i * (g_cols + 1) + g_j] = g_square;
 			g_j++;
 		}
 		g_i++;
