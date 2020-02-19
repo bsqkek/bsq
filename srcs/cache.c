@@ -6,7 +6,7 @@
 /*   By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 20:55:00 by lnovella          #+#    #+#             */
-/*   Updated: 2020/02/19 20:55:03 by lnovella         ###   ########.fr       */
+/*   Updated: 2020/02/19 22:08:12 by lnovella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_bool	add_func(void)
 {
+	char	c;
+
 	while (read(g_fd, &g_1line[0], 1) && g_1line[0] == '0')
 		;
 	g_i = 0;
@@ -26,7 +28,11 @@ t_bool	add_func(void)
 		g_empty = g_1line[--g_i];
 	}
 	else
+	{
+		while (read(g_fd, &c, 1))
+			;
 		return (ERROR);
+	}
 	return (SUCCESS);
 }
 
@@ -65,7 +71,9 @@ void	ft_realloc(int length)
 	i = -1;
 	while (++i < length / 14)
 		newstr[i] = g_1line[i];
+	free(g_1line);
 	g_1line = newstr;
+	free(newstr);
 }
 
 void	ft_idk(void)
@@ -91,9 +99,6 @@ void	ft_idk(void)
 
 t_bool	ft_create_cache(void)
 {
-	int		power14;
-	int		flag;
-
 	if (!add_func2())
 		return (ERROR);
 	g_cols = g_i;

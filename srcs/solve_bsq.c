@@ -6,7 +6,7 @@
 /*   By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 20:29:17 by lnovella          #+#    #+#             */
-/*   Updated: 2020/02/19 21:06:28 by lnovella         ###   ########.fr       */
+/*   Updated: 2020/02/19 22:16:41 by lnovella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_bool	ft_one_column(void)
 	g_i = g_cols + 1;
 	while (read(0, &c, 1))
 	{
-		if ((g_i == g_rows * (g_cols + 1) - 1 && c != '\n')
+		if ((g_i % (g_cols + 1) < g_cols && c != g_empty && c != g_full)
+			|| (g_i == g_rows * (g_cols + 1) - 1 && c != '\n')
 			|| (g_i == g_rows * (g_cols + 1) && c != '\0'))
 		{
 			while (read(0, &c, 1))

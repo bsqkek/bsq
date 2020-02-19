@@ -6,7 +6,7 @@
 /*   By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 20:24:35 by lnovella          #+#    #+#             */
-/*   Updated: 2020/02/19 21:00:16 by lnovella         ###   ########.fr       */
+/*   Updated: 2020/02/19 22:02:00 by lnovella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		main(int argc, char **argv)
 		close(g_fd);
 		free(g_cache);
 		free(g_buffer);
+		g_rows = 0;
+		g_cols = 0;
 		if (argc == 1)
 			return (0);
 	}

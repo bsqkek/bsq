@@ -6,7 +6,7 @@
 /*   By: lnovella <lnovella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 20:50:59 by lnovella          #+#    #+#             */
-/*   Updated: 2020/02/19 20:53:05 by lnovella         ###   ########.fr       */
+/*   Updated: 2020/02/19 22:02:19 by lnovella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	def_glob(void)
 	g_rows = 0;
 	g_res = 0;
 	g_cols = 0;
+	g_x = 0;
+	g_y = 0;
+	g_res = 0;
 }
 
 t_bool	add_func2(void)
 {
 	int	power14;
 
+	def_glob();
 	if (!read_map_options())
 		return (ERROR);
 	g_i = -1;
