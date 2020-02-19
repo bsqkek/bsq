@@ -31,6 +31,7 @@ char			g_empty;
 char			g_full;
 char			g_square;
 char			**g_cache;
+char			g_c;
 int				*g_buffer;
 char			*g_1line;
 short			g_fd;

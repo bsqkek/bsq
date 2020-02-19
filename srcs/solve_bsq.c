@@ -56,7 +56,8 @@ t_bool	is_valid(void)
 	while (g_i < g_rows)
 	{
 		g_j = 0;
-		g_cache[g_i] = (char *)malloc(sizeof(char) * g_cols);
+		if (!(g_cache[g_i] = (char *)malloc(sizeof(char) * (g_cols + 1))))
+			exit (1);
 		while (read(g_fd, &c, 1) && c != '\n')
 		{
 			if (c != g_empty && c != g_full)
@@ -64,17 +65,20 @@ t_bool	is_valid(void)
 			g_cache[g_i][g_j] = c;
 			g_j++;
 		}
+		g_cache[g_i][g_j] = '\n';
 		if (g_j != g_cols)
 			return (ERROR);
 		g_i++;
 	}
-	for (int i = 0; i < g_rows; i++)
+	if (read(g_fd, &c, 1) && c != '\0')
+		return (ERROR);
+	/*for (int i = 0; i < g_rows; i++)
 	{
 		for (int j = 0; j < g_cols; j++)
 			printf("%c", g_cache[i][j]);
 		printf("\n");
 	}
-	printf("-------------------------\n");
+	printf("-------------------------\n");*/
 	return (SUCCESS);
 }
 

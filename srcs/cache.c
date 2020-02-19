@@ -12,9 +12,8 @@ t_bool	read_map_options(void)
 {
 	int		power10;
 
-	g_1line = (char *)malloc(sizeof(char) * 14);
-	if (!g_1line)
-		return (ERROR);
+	if (!(g_1line = (char *)malloc(sizeof(char) * 14)))
+		exit (1);
 	while (read(g_fd, &g_1line[0], 1) && g_1line[0] == '0')
 		;
 	g_i = 0;
@@ -39,12 +38,9 @@ t_bool	read_map_options(void)
 			return (ERROR);
 		power10 *= 10;
 	}
-	//printf("3: g_rows = %d\n", g_rows);
-	//printf("4: empty = %c, full = %c, square = %c\n", g_empty, g_full, g_square);
 	if (g_rows < 1 || g_j != g_i
 		|| g_empty == g_full || g_empty == g_square || g_full == g_square)
 		return (ERROR);
-	//printf("5: empty = %c, full = %c, square = %c\n", g_empty, g_full, g_square);
 	return (SUCCESS);
 }
 
@@ -53,14 +49,12 @@ void	ft_realloc(int length)
 	char	*newstr;
 	int		i;
 
-	newstr = (char *)malloc(sizeof(char) * length);
-	if (!newstr)
+	if(!(newstr = (char *)malloc(sizeof(char) * length)))
 		exit (1);
 	i = -1;
 	while (++i < length / 14)
 		newstr[i] = g_1line[i];
 	g_1line = newstr;
-	printf("Here!\n");
 }
 
 t_bool	ft_create_cache(void)
@@ -71,8 +65,7 @@ t_bool	ft_create_cache(void)
 	set_global_variables();
 	if (!read_map_options())
 		return (ERROR);
-	g_cache = (char **)malloc(sizeof(char *) * g_rows);
-	if (!g_cache)
+	if (!(g_cache = (char **)malloc(sizeof(char *) * g_rows)))
 		exit (1);
 	g_i = -1;
 	while (++g_i < 14 && read(g_fd, &g_1line[g_i], 1) && g_1line[g_i] != '\n')
@@ -81,7 +74,10 @@ t_bool	ft_create_cache(void)
 	power14 = 14;
 	while (g_i == power14 && g_1line[power14 - 1] != '\n')
 	{
-		power14 *= 14;
+		if (power14 != 1475789056)
+            power14 *= 14;
+        else
+            power14 = 2147483647;
 		ft_realloc(power14);
 		g_i--;
 		while (++g_i < power14 && read(g_fd, &g_1line[g_i], 1) && g_1line[g_i] != '\n')
@@ -89,10 +85,6 @@ t_bool	ft_create_cache(void)
 				return (ERROR);
 	}
 	g_cols = g_i;
-	//printf("g_cols = %d\n", g_cols);
-	//printf("g_1line = %s\n", g_1line);
-	if (g_1line[g_cols] == '\n')
-		printf("Yes!\n");
 	g_cache[0] = (char *)malloc(sizeof(char) * g_cols);
 	g_buffer= (int *)malloc(sizeof(int) * g_cols);
 	if (!g_cache || !g_buffer)
