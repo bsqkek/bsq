@@ -4,7 +4,7 @@
 void	set_global_variables(void)
 {
 	g_rows = 0;
-	g_res = 1;
+	g_res = 0;
 	g_cols = 0;
 }
 
@@ -39,12 +39,12 @@ t_bool	read_map_options(void)
 			return (ERROR);
 		power10 *= 10;
 	}
-	printf("3: g_rows = %d\n", g_rows);
-	printf("4: empty = %c, full = %c, square = %c\n", g_empty, g_full, g_square);
+	//printf("3: g_rows = %d\n", g_rows);
+	//printf("4: empty = %c, full = %c, square = %c\n", g_empty, g_full, g_square);
 	if (g_rows < 1 || g_j != g_i
 		|| g_empty == g_full || g_empty == g_square || g_full == g_square)
 		return (ERROR);
-	printf("5: empty = %c, full = %c, square = %c\n", g_empty, g_full, g_square);
+	//printf("5: empty = %c, full = %c, square = %c\n", g_empty, g_full, g_square);
 	return (SUCCESS);
 }
 
@@ -66,13 +66,14 @@ void	ft_realloc(int length)
 t_bool	ft_create_cache(void)
 {
 	int		power14;
+	int		flag;
 
 	set_global_variables();
 	if (!read_map_options())
 		return (ERROR);
 	g_cache = (char **)malloc(sizeof(char *) * g_rows);
-		if (!g_cache)
-			exit (1);
+	if (!g_cache)
+		exit (1);
 	g_i = -1;
 	while (++g_i < 14 && read(g_fd, &g_1line[g_i], 1) && g_1line[g_i] != '\n')
 		if (g_1line[g_i] != g_empty && g_1line[g_i] != g_full)
@@ -88,8 +89,8 @@ t_bool	ft_create_cache(void)
 				return (ERROR);
 	}
 	g_cols = g_i;
-	printf("g_cols = %d\n", g_cols);
-	printf("g_1line = %s\n", g_1line);
+	//printf("g_cols = %d\n", g_cols);
+	//printf("g_1line = %s\n", g_1line);
 	if (g_1line[g_cols] == '\n')
 		printf("Yes!\n");
 	g_cache[0] = (char *)malloc(sizeof(char) * g_cols);
@@ -97,10 +98,15 @@ t_bool	ft_create_cache(void)
 	if (!g_cache || !g_buffer)
 		exit (1);
 	g_j = -1;
+	flag = 0;
 	while(++g_j < g_cols)
 	{
 		if ((g_cache[0][g_j] = g_1line[g_j]) == g_empty)
+		{
+			if (!flag && (flag = 1) && (g_res = 1))
+				g_x = g_j;
 			g_buffer[g_j] = 1;
+		}
 		else
 			g_buffer[g_j] = 0;
 	}
